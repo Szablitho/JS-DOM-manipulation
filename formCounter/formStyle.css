@@ -1,0 +1,40 @@
+body {
+  background-color: rgb(31, 31, 31);
+  font-family: Arial, Helvetica, sans-serif;
+}
+header {
+  text-align: center;
+}
+form h3{
+  margin: 0;
+}
+form .product-card {
+  background-color: blanchedalmond;
+  padding: 1rem;
+  max-width: 70vw;
+  border-radius: 5px;
+  margin: 5rem auto;
+  
+}
+form .product-card input{
+  margin: 0.5rem 0;
+  border-radius: 2px;
+  border: 0.5px solid grey;
+  padding: 0.2rem;
+  max-width: 14rem; 
+}
+form .product-card .container-counter {
+  margin: 0 1rem;
+  font-family: monospace,sans-serif;
+}
+.warning {
+  background-color: rgb(255, 121, 121);
+}
+form .product-card button {
+  display: block;
+  background-color: rgb(202, 78, 0);
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-top: 1rem;
+}
