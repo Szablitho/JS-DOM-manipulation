@@ -1,13 +1,15 @@
 let textInput = document.querySelector(".input-text");
 textInput.addEventListener("input", (event) => {
+  let enteredText = event.target;
   let counter = document.querySelector(".text-counter");
-  let maxChars = document.querySelector(".input-text").getAttribute("maxlength");
+  let maxChars = textInput.maxLength;
   //taking value from input simply by .value method, also calculating how much characters left
   //for maxCount, I had to trasform string to number, because <strong> doesnt have any value
-  let inputSpaceLeft = parseInt(maxChars) - textInput.value.length;
+  let inputSpaceLeft = maxChars - enteredText.value.length;
+
   counter.innerHTML = inputSpaceLeft;
 
-  //styling counter if it shows 10 or lesser
+  //styling counter parent if it shows 10 chars or lesser
   let CounterContainer = document.querySelector(".container-counter");
   if(parseInt(counter.textContent) <= 10) {
     //conditional prevents adding warning class more than once
