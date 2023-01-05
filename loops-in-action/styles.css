@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(24, 24, 24);
+}
+h1 {
+  text-align: center;
+  color: rgb(255, 181, 85);
+}
+section {
+  background-color: antiquewhite;
+  border-radius: 5px;
+  width: 60vw;
+  padding: 1.5rem;
+  margin: 2rem auto;
+}
+section label {
+  display: block;
+  margin-bottom: 1rem;
+}
+section input {
+  width: 4rem;
+  border-radius: 2px;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}
+button {
+  background-color: rgb(255, 167, 52);
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 2rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+button:hover {
+  background-color: rgb(249, 141, 0);
+  box-shadow: 0 0 3px rgb(87, 87, 87);
+}
+.output {
+  font-weight: bold;
+  background-color: rgb(255, 167, 52);
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+section a {
+  text-decoration: none;
+  color: rgb(255, 145, 0);
+}
+a.highlight {
+  background-color: rgb(63,4,141);
+  padding: 0.25rem;
+}
+#calculated-sum {
+  padding: 1rem;
+  text-align: center;
+  font-size: 3rem;
+  display: none;
+}

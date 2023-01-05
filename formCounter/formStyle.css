@@ -4,6 +4,7 @@ body {
 }
 header {
   text-align: center;
+  color: grey;
 }
 form h3{
   margin: 0;
@@ -27,8 +28,17 @@ form .product-card .container-counter {
   margin: 0 1rem;
   font-family: monospace,sans-serif;
 }
-.warning {
-  background-color: rgb(255, 121, 121);
+.text-counter.warning {
+  color: rgb(255, 70, 70);
+}
+form .product-card input.warning {
+  background-color: rgb(255, 181, 181);
+}
+.text-counter.error {
+  color: rgb(255, 9, 9);
+}
+form .product-card input.error {
+  background-color: rgb(255, 106, 106);
 }
 form .product-card button {
   display: block;
@@ -37,4 +47,19 @@ form .product-card button {
   padding: 0.5rem 1rem;
   border: none;
   margin-top: 1rem;
+}
+footer {
+  text-align: center;
+  background-color: rgb(170, 65, 12);
+  padding: 3rem;
+}
+footer a {
+  text-decoration: none;
+  color:antiquewhite;
+  font-size: 1rem;
+}
+footer a:hover {
+  text-decoration: underline;
+  text-decoration-color: antiquewhite;
+  text-shadow: 1px 1px 1px black;
 }

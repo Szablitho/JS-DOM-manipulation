@@ -4,19 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>In-form counter</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <title>Form counting characters</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="formStyle.css" />
+    <script src="formCounting.js" defer></script>
+    <script src="loops.js"></script>
   </head>
   <body>
-    <h1>Hi there!</h1>
-    <p>Insert anchor here bro</p>
-    <p>
-      This is a <a href="#"> link </a>
-    </p>
-    <button class="view-btn">View more</button>
-    <div style="position:fixed">
-      <p class="moreText">Akukuuu!</p>
-    </div>
+    <header> <h4>Type something to see counter, please</h4></header>
+      <form action="" method="GET">
+        <div class="product-card">
+          <h3>Product Name</h3>
+          <input class="input-text" type="text" name="product-name" maxlength="60"/>
+          <span class="container-counter">
+            <strong class="text-counter">0</strong>/<strong>60</strong
+            >
+          </span>
+          <button>Submit</button>
+        </div>
+      </form>
+    <footer>
+      <ul>
+        <li>
+          <a href="../exercise2/index.html">Intro task</a>
+        </li>
+        <li> <a href="index.html">Form </a>
+          calculating characters that user have left
+        </li>
+        <li>
+          A view examples of different
+          <a href="../loops-in-action/index.html"> loops </a>
+          in use
+        </li>
+        <li>Or come back to the <a href="../index.html">Homepage</a></li>
+      </ul>
+    </footer>
   </body>
 </html>

@@ -1,0 +1,68 @@
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(24, 24, 24);
+  --orange-color: rgb(255, 181, 85);
+  --darker-orange-color: rgb(255, 161, 38);
+}
+header {
+  text-align: center;
+  color: var(--orange-color);
+}
+header p {
+  margin: 0 auto;
+  text-align: left;
+  width: 60vw;
+  color: rgb(255, 199, 125);
+  font-size: 0.8rem;
+}
+header a {
+  display: block;
+  margin: 0.3rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--orange-color);
+  text-shadow: 1px 1px 1px rgb(43, 43, 43);
+}
+main {
+  background-color: antiquewhite;
+  border-radius: 5px;
+  width: 60vw;
+  padding: 1.5rem;
+  margin: 2rem auto;
+}
+ul {
+  margin: 0 auto;
+  width: 60vw;
+  list-style: none;
+  padding: 0;
+}
+ul li::before {
+  content: "\2192";
+  color: var(--darker-orange-color);
+  margin: 0.2rem;
+}
+ul a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: rgb(19, 19, 19);
+  color: var(--orange-color);
+}
+ul a:hover {
+  text-shadow: 1px 1px 1px rgb(32, 32, 32);
+  color: var(--darker-orange-color);
+}
+footer {
+  background-color: rgb(170, 65, 12);
+  padding: 3rem;
+}
+footer a {
+  text-decoration: none;
+  color:antiquewhite;
+  font-size: 1rem;
+}
+footer a:hover {
+  text-decoration: underline;
+  text-decoration-color: antiquewhite;
+  text-shadow: 1px 1px 1px black;
+}
