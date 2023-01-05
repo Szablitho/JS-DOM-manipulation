@@ -48,18 +48,3 @@ form .product-card button {
   border: none;
   margin-top: 1rem;
 }
-footer {
-  text-align: center;
-  background-color: rgb(170, 65, 12);
-  padding: 3rem;
-}
-footer a {
-  text-decoration: none;
-  color:antiquewhite;
-  font-size: 1rem;
-}
-footer a:hover {
-  text-decoration: underline;
-  text-decoration-color: antiquewhite;
-  text-shadow: 1px 1px 1px black;
-}
