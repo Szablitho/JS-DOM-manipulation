@@ -40,15 +40,16 @@
     <ul id="output-user-data"></ul>
   </section>
 
-  <section>
+  <section id="statistics">
     <h2>Statistics</h2>
     <p>Test your luck and find out how many dice rolls(1-6 dice) it takes you to roll a certain number(between 1 and 6).</p>
     <div>
       <label for="roll-number">Your target number</label>
-      <input type="number" id="roll-number">
+      <input type="number" id="user-roll-number" min="1" max="6">
     </div>
     <button>Roll the dice</button>
-    <p>It took you <strong id="rolls">X</strong>rolls to roll a <strong id="dice-number">Y</strong></p>
+    <ul id="dice-rolls"></ul>
+    <p>It took you <strong id="output-total-rolls">X</strong> rolls to roll a <strong id="dice-number">Y</strong></p>
   </section>
   <footer>
     <ul>

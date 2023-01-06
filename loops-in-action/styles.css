@@ -55,3 +55,6 @@ a.highlight {
   font-size: 3rem;
   display: none;
 }
+ul#dice-rolls {
+  margin: 1rem;
+}
