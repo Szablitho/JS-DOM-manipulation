@@ -52,8 +52,13 @@ section span {
   font-size: 1.5rem;
   color: var(--text-orange)
 }
-span.player-tag {
-  margin: 1rem;
+span.player-tag-X {
+  margin: 2rem;
+  font-size: 2rem;
+  color: rgb(19, 19, 19);
+}
+span.player-tag-O {
+  margin: 2rem;
   font-size: 2rem;
   color: rgb(19, 19, 19);
 }
@@ -85,6 +90,7 @@ footer ul {
   left: 10%;
   right: 10%;
   border-radius: 5px;
+  filter: initial !important;
 }
 #overlay label, #overlay input {
   display: block;
@@ -104,6 +110,7 @@ footer ul {
   background-color: transparent;
   color: var(--text-orange);
 }
+
 #win-award {
   display: none;
   text-align: center;
