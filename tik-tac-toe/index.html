@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Play Tic-Tac-Toe</h1>
+    <p>Built with HTML,CSS,Javascript and - of course all by myself with intention to learn more</p>
+  </header>
+  <main>
+    <div class="control">
+      <section class="player" id="first-player">
+        <h3>Player 1</h3>
+        <span>Player Name</span>
+        <span class="player-tag">X</span>
+        <button>Edit</button>
+      </section>
+      <section class="player" id="second-player">
+        <h3>Player 2</h3>
+        <span>Player Name</span>
+        <span class="player-tag">O</span>
+        <button>Edit</button>
+      </section>
+    </div>
+    <div id="overlay">
+      <form action="" method="get">
+        <h2>Choose your name</h2>
+      <label for="player-name">Player Name</label>
+      <input type="text" name="playerName" id="player-name">
+      <button id="cancel-name" type="reset"> Cancel </button>
+      <button id="confirm-name" type="submit"> Confirm </button>
+      </form>
+      
+    </div>
+    <section id="win-award">You are doing <span> PlayerName </span> it yo!</section>
+    <section id="game">
+      <span class="tic-tak-toe-block" id="first-block"> </span>
+      <span class="tic-tak-toe-block" id="second-block"></span>
+      <span class="tic-tak-toe-block" id="third-block"></span>
+      <span class="tic-tak-toe-block" id="fourth-block"></span>
+      <span class="tic-tak-toe-block" id="fifth-block"></span>
+      <span class="tic-tak-toe-block" id="sixth-block"></span>
+      <span class="tic-tak-toe-block" id="seventh-block"></span>
+      <span class="tic-tak-toe-block" id="eighth-block"></span>
+      <span class="tic-tak-toe-block" id="ningth-block"></span>
+    </section>
+    
+    <button>Start New Game</button>
+  </main>
+  <footer>
+    <h2>By Szablitho</h2>
+    <p>Check out other projects:</p>
+    <ul>
+      <li>links for github or other projects in repo</li>
+    </ul>
+  </footer>
+</body>
+</html>
