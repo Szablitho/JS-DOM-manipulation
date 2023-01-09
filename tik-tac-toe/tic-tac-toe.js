@@ -3,6 +3,7 @@ const editBtn1 = document.querySelector("#first-player button");
 const editBtn2 = document.querySelector("#second-player button");
 const confirmBtn = document.querySelector("#confirm-name");
 const cancelBtn = document.querySelector("#cancel-name");
+const startGameBtn = document.querySelector('main > button');
 
 function darkenBackground() {
   document.querySelector("header, main").style.filter = "brightness(0.3)";
@@ -32,34 +33,32 @@ function displayControlPanel(event) {
   if(ID == 1) {
     let playerID = ID;
     console.log(playerID);
-    return playerID;
+    localStorage.setItem('playerID', playerID);
   } else {
     let playerID = ID;
     console.log(playerID);
-    return playerID;
+    localStorage.setItem('playerID', playerID);
   }
-  // console.log(playerID); //undefined
 }
 
-function confirmName(playerID) { //pointer event???
-  console.log(overlay);
+function confirmName() { //pointer event???
+  playerID = localStorage.getItem('playerID');
   console.log(playerID);
+  console.log(localStorage.getItem('playerID')); // this updates the ID in local storage, always use getItem to refresh ID, not "setItem"
   const setPlayerNameInput = document.querySelector("#player-name-input");
-   //validation of name
-  if(setPlayerNameInput.value == '') {
+   //validation of name if empty or white spaces(with regular expression)
+   if(setPlayerNameInput.value == '' ||  /\W/.test( setPlayerNameInput.value ) ) {
     setPlayerNameInput.style.backgroundColor = "rgb(255, 110, 110)";
   } else {
-    //checking playerID
+    //checking playerID and setting new name on assigned to it <span> tag
     if(playerID == 1) {
       let playerOne = document.querySelector("#first-player span").textContent = setPlayerNameInput.value;
       overlay.style.visibility = "hidden";
       undarkenBackground();
-      return playerOne;
     } else { 
         let playerTwo = document.querySelector("#second-player span").textContent = setPlayerNameInput.value;
         overlay.style.visibility = "hidden";
         undarkenBackground();
-        return playerTwo;
     }
   }
   
@@ -68,17 +67,21 @@ const cancelEditingName = () => {
   overlay.style.visibility = "hidden";
   undarkenBackground();
 }
+//make function that show game panel, disables profile panel,restarts game
+function startGame() {
+
+}
+//func making turn
+function playTic() {
+  
+}
 
 editBtn1.addEventListener("click", displayControlPanel);
 editBtn2.addEventListener("click", displayControlPanel);
 confirmBtn.addEventListener("click", confirmName);
 cancelBtn.addEventListener("click",cancelEditingName);
+startGameBtn.addEventListener('click', startGame);
 
-
-function newFunction() {
-  let playerName;
-  return playerName;
-}
 // edit initialization(confirm name with editPlayerName inside)/overlay appear and player ID is known
 // editing name func/validation
 //confirmation or cancel
