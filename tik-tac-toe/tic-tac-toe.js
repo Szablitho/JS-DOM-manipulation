@@ -9,7 +9,7 @@ const controlPanel = document.querySelector(".control");
 const gameBlock = document.querySelector("#game");
 const gameField = document.querySelectorAll(".tic-tak-toe-block");
 const turnNotice = document.querySelector("#turn-notice");
-
+// to be replaced by additinal dark overlay under controlPanel
 function darkenBackground() {
   document.querySelector("header, main").style.filter = "brightness(0.3)";
   document.querySelector("header, main").style.filter = "brightness(0.3)";
@@ -22,7 +22,7 @@ function darkenBackground() {
       span.style.filter = "brightness(0.3)";
     }
 }
-// to be replaced by additinal dark overlay under controlPanel
+
 function undarkenBackground() {
   const allEll = document.querySelectorAll("*");
     for (const element of allEll) {
@@ -96,6 +96,11 @@ function startGame() {
     gameBlock.style.display = "none";
     turnNotice.style.display = "none";
     controlPanel.style.pointerEvents = "auto";
+    gameField.forEach(el => { 
+      el.style.backgroundColor = "rgb(251, 212, 160)";
+      el.style.pointerEvents = "auto";
+      el.innerText = ' ';
+    });
     return gameRestart = false;
   }
 }
@@ -108,18 +113,22 @@ function playTic(event) {
   if(currentTurnPlayerID == 1) {
     // execution for player one
     console.log("player One made turn");
+    event.target.innerText = "X";
     let playerTwo = JSON.parse(localStorage.getItem("playerTwo"));
     currentTurnPlayerID = localStorage.setItem('currentTurnPlayerID',2);
     turnNotice.innerText = `Your turn ${playerTwo[1]}!`;
   } else if(currentTurnPlayerID == 2) {
     //execution for player two
     console.log("player Two made turn");
+    event.target.innerText = "O";
     let playerOne = JSON.parse(localStorage.getItem("playerOne"));
     currentTurnPlayerID = localStorage.setItem('currentTurnPlayerID',1);;
     turnNotice.innerText = `Your turn ${playerOne[1]}!`;
   } else {
     alert("For better expierience, create names!");
   }
+  event.target.style.backgroundColor = "var(--text-orange-900)";
+  event.target.style.pointerEvents = "none";
 }
 
 editBtn1.addEventListener("click", displayControlPanel);
