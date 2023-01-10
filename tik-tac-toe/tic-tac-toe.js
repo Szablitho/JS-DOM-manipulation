@@ -48,34 +48,28 @@ function displayControlPanel(event) {
 
 function confirmName() { //pointer event???
   let firstPlayerName = document.querySelector("#first-player span");
+  let secondPlayerName = document.querySelector("#second-player span");
   playerID = localStorage.getItem('playerID');
   console.log(playerID); // this updates the ID in local storage, always use getItem to refresh ID, not "setItem"
   const setPlayerNameInput = document.querySelector("#player-name-input");
    //validation of name if empty or white spaces(with regular expression)
-   if(setPlayerNameInput.value == '' ||  /\W/.test( setPlayerNameInput.value ) || firstPlayerName ==  setPlayerNameInput.value) {
+   if(setPlayerNameInput.value == '' ||  /\W/.test( setPlayerNameInput.value ) || firstPlayerName ==  setPlayerNameInput.value || secondPlayerName == setPlayerNameInput.value) {
     setPlayerNameInput.style.backgroundColor = "rgb(255, 110, 110)";
   } else {
     //checking playerID and setting new name on assigned to it <span> tag
     if(playerID == 1) {
       let name = document.querySelector("#first-player span").textContent = setPlayerNameInput.value;
-      
-      const playerOne = {
-        ID: playerID,
-        name: name,
-        playerTag: document.querySelector(".player-tag-X").innerText
-      }
+
+      const playerOne = [playerID, name,'X'];
+      //saving array in browser local storage, have to convert it to string first
+      localStorage.setItem('playerOne', JSON.stringify(playerOne));
+
       overlay.style.visibility = "hidden";
       undarkenBackground();
-      localStorage.setItem("playerOne", playerOne);
     } else { 
         let name = document.querySelector("#second-player span").textContent = setPlayerNameInput.value;
-
-        const playerTwo = {
-          ID: playerID,
-          name: name,
-          playerTag: document.querySelector(".player-tag-X").innerText
-        }
-        localStorage.setItem("playerTwo", playerTwo);
+        const playerTwo = [playerID, name, "O"];
+        localStorage.setItem("playerTwo", JSON.stringify(playerTwo));
         overlay.style.visibility = "hidden";
         undarkenBackground();
       }
@@ -90,20 +84,13 @@ const cancelEditingName = () => {
 let gameRestart = false;
 function startGame() {
   if(!gameRestart) {
-    const playerOne = {
-      ID: 1,
-      name: document.querySelector("#first-player span").textContent,
-      playerTag: "X"
-    }
-    const playerTwo = {
-      ID: 2,
-      name: document.querySelector("#second-player span").textContent,
-      playerTag: "O"
-    }
     gameBlock.style.display = "grid";
-    controlPanel.style.pointerEvents = "none" //to change after game finishes in other func
-    turnNotice.innerText = `Your turn ${playerOne['name']}!`;
+    controlPanel.style.pointerEvents = "none";
+    let playerOne = JSON.parse(localStorage.getItem('playerOne'));
+    turnNotice.innerText = `Your turn ${playerOne[1]}!`;
     turnNotice.style.display = "initial";
+    localStorage.setItem('currentTurnPlayerID',1); // always player one will start
+
     return gameRestart = true;
   } else {
     gameBlock.style.display = "none";
@@ -115,13 +102,21 @@ function startGame() {
 //func making turn
 function playTic(event) {
   console.log(event.target.id);
-  let currentID = playerID; //its either 1 or 2 depends which player was edited last. this has to be dynamicly checked, not hardly set
-  if(currentID == 1) {
+  //checking ID of currernt turn player
+  let currentTurnPlayerID = localStorage.getItem('currentTurnPlayerID');
+
+  if(currentTurnPlayerID == 1) {
     // execution for player one
     console.log("player One made turn");
-  } else if(currentID == 2) {
-    //execution for player
+    let playerTwo = JSON.parse(localStorage.getItem("playerTwo"));
+    currentTurnPlayerID = localStorage.setItem('currentTurnPlayerID',2);
+    turnNotice.innerText = `Your turn ${playerTwo[1]}!`;
+  } else if(currentTurnPlayerID == 2) {
+    //execution for player two
     console.log("player Two made turn");
+    let playerOne = JSON.parse(localStorage.getItem("playerOne"));
+    currentTurnPlayerID = localStorage.setItem('currentTurnPlayerID',1);;
+    turnNotice.innerText = `Your turn ${playerOne[1]}!`;
   } else {
     alert("For better expierience, create names!");
   }
