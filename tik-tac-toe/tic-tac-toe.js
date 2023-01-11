@@ -55,7 +55,7 @@ function confirmName() { //pointer event???
   console.log(playerID); // this updates the ID in local storage, always use getItem to refresh ID, not "setItem"
   const setPlayerNameInput = document.querySelector("#player-name-input");
    //validation of name if empty or white spaces(with regular expression)
-   if(setPlayerNameInput.value == '' ||  /\W/.test( setPlayerNameInput.value ) || firstPlayerName ==  setPlayerNameInput.value || secondPlayerName == setPlayerNameInput.value) {
+   if(setPlayerNameInput.value == '' ||  /\W/.test( setPlayerNameInput.value )) {
     setPlayerNameInput.style.backgroundColor = "rgb(255, 110, 110)";
   } else {
     //checking playerID and setting new name on assigned to it <span> tag
@@ -88,6 +88,9 @@ function startGame() {
   if(!gameRestart) {
     gameBlock.style.display = "grid";
     gameBlock.style.pointerEvents = "all";
+    gameField.forEach((field) => {
+      field.style.pointerEvents = 'auto';
+      });
     controlPanel.style.pointerEvents = "none";
     let playerOne = JSON.parse(localStorage.getItem('playerOne'));
     turnNotice.innerText = `Your turn ${playerOne[1]}!`;
@@ -161,6 +164,9 @@ function checkWinner(player) {
       winAward.innerHTML = "DRAW";
       winAward.style.display = "block";
       gameBlock.style.pointerEvents = "none";
+      gameField.forEach((field) => {
+        field.style.pointerEvents = 'none';
+        });
       console.log("Player won in last movement! Draw was overwritten by his win - literally in this code");
     }
     //checking if win cases scenarios are met, done just once after all tags were saved in fields and in array for later checkup,making equation to playerTag that is switching on every call of function
@@ -199,7 +205,9 @@ function makeWinner(name) {
   winAward.innerHTML = `Chicken dinerrr! ${name} is a winnerrrrrrrrrr`;
   winAward.style.display = "block";
   //disabling gameField
-  gameBlock.style.pointerEvents = "none";
+  gameField.forEach((field) => {
+  field.style.pointerEvents = 'none';
+  });
 }
   
 editBtn1.addEventListener("click", displayControlPanel);
@@ -209,6 +217,4 @@ cancelBtn.addEventListener("click", cancelEditingName);
 startGameBtn.addEventListener('click', startGame); // or restart
 gameField.forEach( el => el.addEventListener("click", playTic));
 
-// edit initialization(confirm name with editPlayerName inside)/overlay appear and player ID is known
-// editing name func/validation
-//confirmation or cancel
+//https://medium.com/@ayushya/move-directory-from-one-repository-to-another-preserving-git-history-d210fa049d4b
