@@ -115,12 +115,12 @@ footer ul {
 #win-award {
   display: none;
   text-align: center;
-  width: initial;
   width: 100%; /* overwriting width from section */
   max-width: 40rem; /* actual setting of custom width */
   padding: 3rem 0;
   background-color: var(--text-orange-300);
-  color: antiquewhite;
+  font-size: 2rem;
+  color: var(--text-black);
 }
 #win-award span {
   text-transform: capitalize;
