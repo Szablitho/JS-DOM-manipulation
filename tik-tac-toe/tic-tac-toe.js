@@ -9,6 +9,8 @@ const controlPanel = document.querySelector(".control");
 const gameBlock = document.querySelector("#game");
 const gameField = document.querySelectorAll(".tic-tak-toe-block");
 const turnNotice = document.querySelector("#turn-notice");
+const winAward = document.querySelector('#win-award');
+
 // to be replaced by additinal dark overlay under controlPanel
 function darkenBackground() {
   document.querySelector("header, main").style.filter = "brightness(0.3)";
@@ -85,6 +87,7 @@ let gameRestart = false;
 function startGame() {
   if(!gameRestart) {
     gameBlock.style.display = "grid";
+    gameBlock.style.pointerEvents = "all";
     controlPanel.style.pointerEvents = "none";
     let playerOne = JSON.parse(localStorage.getItem('playerOne'));
     turnNotice.innerText = `Your turn ${playerOne[1]}!`;
@@ -97,9 +100,10 @@ function startGame() {
     turnNotice.style.display = "none";
     controlPanel.style.pointerEvents = "auto";
     gameField.forEach(el => { 
-      el.style.backgroundColor = "rgb(251, 212, 160)";
+      el.style.backgroundColor = "";
       el.style.pointerEvents = "auto";
       el.innerText = ' ';
+      winAward.style.display = "none";
     });
     return gameRestart = false;
   }
@@ -107,23 +111,31 @@ function startGame() {
 //func making turn
 function playTic(event) {
   console.log(event.target.id);
-  //checking ID of currernt turn player
+  //checking ID of current turn player
   let currentTurnPlayerID = localStorage.getItem('currentTurnPlayerID');
 
   if(currentTurnPlayerID == 1) {
-    // execution for player one
+    // execution for player one, switching id to 2
     console.log("player One made turn");
     event.target.innerText = "X";
     let playerTwo = JSON.parse(localStorage.getItem("playerTwo"));
     currentTurnPlayerID = localStorage.setItem('currentTurnPlayerID',2);
     turnNotice.innerText = `Your turn ${playerTwo[1]}!`;
+    let playerOne = JSON.parse(localStorage.getItem("playerOne"));
+
+    checkWinner(playerOne);
+
   } else if(currentTurnPlayerID == 2) {
-    //execution for player two
+    //execution for player two,switching id to 1
     console.log("player Two made turn");
     event.target.innerText = "O";
     let playerOne = JSON.parse(localStorage.getItem("playerOne"));
     currentTurnPlayerID = localStorage.setItem('currentTurnPlayerID',1);;
     turnNotice.innerText = `Your turn ${playerOne[1]}!`;
+    let playerTwo = JSON.parse(localStorage.getItem("playerTwo"));
+
+    checkWinner(playerTwo);
+
   } else {
     alert("For better expierience, create names!");
   }
@@ -131,12 +143,71 @@ function playTic(event) {
   event.target.style.pointerEvents = "none";
 }
 
+function checkWinner(player) {
+  let ID = player[0];
+  let name = player[1];
+  let tag = player[2];
+  console.log(`ID: ${ID},name: + ${name}, +tag: ${tag}`);
+  //in forEach loop save values from game fields
+  let array = [];
+      //1st arg = html target, 2nd arg = index of array, 3rd arg = array name
+  gameField.forEach((field,index) => {
+    array[index] = field.innerText; //saving field value in a array
+    console.log(array);
+    });
+    //check if there are fields left to fill, if so, it is then a draw
+    const areFieldsFull = (value) => value != '';
+    if(array.every(areFieldsFull)) {
+      winAward.innerHTML = "DRAW";
+      winAward.style.display = "block";
+      gameBlock.style.pointerEvents = "none";
+      console.log("Player won in last movement! Draw was overwritten by his win - literally in this code");
+    }
+    //checking if win cases scenarios are met, done just once after all tags were saved in fields and in array for later checkup,making equation to playerTag that is switching on every call of function
+    switch (true) {
+      //horizontal rows
+      case (array[0] == tag && array[1] == tag && array[2] == tag):
+        makeWinner(name);
+        break;
+      case (array[3] == tag && array[4] == tag && array[5] == tag):
+        makeWinner(name);
+        break;
+      case (array[6] == tag && array[7] == tag && array[8] == tag):
+        makeWinner(name);
+        break;
+        // vertical all rows
+      case (array[0] == tag && array[3] == tag && array[6] == tag):
+        makeWinner(name);
+        break;
+      case (array[1] == tag && array[4] == tag && array[7] == tag):
+        makeWinner(name);
+        break;
+      case (array[2] == tag && array[5] == tag && array[8] == tag):
+        makeWinner(name);
+        break;
+        //diagonall
+      case (array[2] == tag && array[4] == tag && array[6] == tag):
+        makeWinner(name);
+        break;
+      case (array[0] == tag && array[4] == tag && array[8] == tag):
+        makeWinner(name);
+        break;
+    }
+}
+function makeWinner(name) {
+  //setting winner
+  winAward.innerHTML = `Chicken dinerrr! ${name} is a winnerrrrrrrrrr`;
+  winAward.style.display = "block";
+  //disabling gameField
+  gameBlock.style.pointerEvents = "none";
+}
+  
 editBtn1.addEventListener("click", displayControlPanel);
 editBtn2.addEventListener("click", displayControlPanel);
 confirmBtn.addEventListener("click", confirmName);
-cancelBtn.addEventListener("click",cancelEditingName);
+cancelBtn.addEventListener("click", cancelEditingName);
 startGameBtn.addEventListener('click', startGame); // or restart
-gameField.forEach( el => el.addEventListener("click",playTic));
+gameField.forEach( el => el.addEventListener("click", playTic));
 
 // edit initialization(confirm name with editPlayerName inside)/overlay appear and player ID is known
 // editing name func/validation
