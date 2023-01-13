@@ -52,7 +52,7 @@ function confirmName() { //pointer event???
   const setPlayerNameInput = document.querySelector("#player-name-input");
    //validation of name if empty or white spaces(with regular expression)
    if(setPlayerNameInput.value == '' ||  /\s/.test( setPlayerNameInput.value )) {
-    setPlayerNameInput.style.backgroundColor = "rgb(255, 110, 110)";
+    setPlayerNameInput.style.color = "rgb(255, 110, 110)";
   } else {
     //checking playerID and setting new name on assigned to it <span> tag
     if(playerID == 1) {
@@ -104,7 +104,7 @@ function startGame() {
     turnNotice.style.display = "none";
     controlPanel.style.pointerEvents = "auto";
     gameField.forEach(el => { 
-      el.style.backgroundColor = "";
+      el.style.color = "";
       el.style.pointerEvents = "auto";
       el.innerText = ' ';
       winAward.style.display = "none";
@@ -143,7 +143,6 @@ function playTic(event) {
   } else {
     alert("For better expierience, create names!");
   }
-  event.target.style.backgroundColor = "var(--text-orange-900)";
   event.target.style.pointerEvents = "none";
 }
 
@@ -169,42 +168,52 @@ function checkWinner(player) {
         field.style.pointerEvents = 'none';
         });
     }
+    let firstSpanBlock = document.querySelector("#first-block");
+    let secondSpanBlock = document.querySelector("#second-block");
+    let thirdSpanBlock = document.querySelector("#third-block");
+    let fourthSpanBlock = document.querySelector("#fourth-block");
+    let fifthSpanBlock = document.querySelector("#fifth-block");
+    let sixthSpanBlock = document.querySelector("#sixth-block");
+    let seventhSpanBlock = document.querySelector("#seventh-block");
+    let eighthSpanBlock = document.querySelector("#eighth-block");
+    let ningthSpanBlock = document.querySelector("#ningth-block");
     //checking if win cases scenarios are met, done just once after all tags were saved in fields and in array for later checkup,making equation to playerTag that is switching on every call of function
     switch (true) {
       //horizontal rows
       case (array[0] == tag && array[1] == tag && array[2] == tag):
         makeWinner(name);
-        crossWinnerFields('0','0,-5em');
+        crossWinnerFields(firstSpanBlock,secondSpanBlock,thirdSpanBlock);
         break;
       case (array[3] == tag && array[4] == tag && array[5] == tag):
         makeWinner(name);
-        crossWinnerFields('0','0');
+        crossWinnerFields(fourthSpanBlock,fifthSpanBlock,sixthSpanBlock);
         break;
       case (array[6] == tag && array[7] == tag && array[8] == tag):
         makeWinner(name);
-        crossWinnerFields('0','0,5em');
+        crossWinnerFields(seventhSpanBlock,eighthSpanBlock,ningthSpanBlock);
         break;
         // vertical all rows
       case (array[0] == tag && array[3] == tag && array[6] == tag):
         makeWinner(name);
-        crossWinnerFields('90deg','0, 5em');
+        crossWinnerFields(firstSpanBlock,fourthSpanBlock,seventhSpanBlock);
         break;
       case (array[1] == tag && array[4] == tag && array[7] == tag):
         makeWinner(name);
-        crossWinnerFields('90deg','0,0');
+        crossWinnerFields(secondSpanBlock,fifthSpanBlock,eighthSpanBlock);
         break;
       case (array[2] == tag && array[5] == tag && array[8] == tag):
         makeWinner(name);
-        crossWinnerFields('90deg','0, -5em');
+        crossWinnerFields(thirdSpanBlock,sixthSpanBlock, ningthSpanBlock);
         break;
         //diagonall
       case (array[2] == tag && array[4] == tag && array[6] == tag):
         makeWinner(name);
-        crossWinnerFields('135deg','2rem, 1.7rem');
+        crossWinnerFields(thirdSpanBlock,fifthSpanBlock,seventhSpanBlock);
         break;
       case (array[0] == tag && array[4] == tag && array[8] == tag):
         makeWinner(name);
-        crossWinnerFields('45deg','-2rem, 1.7rem');
+        crossWinnerFields(firstSpanBlock,fifthSpanBlock,ningthSpanBlock);
+
         break;
     }
 }
@@ -218,20 +227,10 @@ function makeWinner(name) {
   field.style.pointerEvents = 'none';
   });
 }
-function crossWinnerFields(rotate,translate) {
-  let line = document.createElement("hr");
-  line.style.display = "initial";
-  line.style.position = "absolute";
-  if(rotate) {
-    line.style.transform = `rotate(${rotate}) `;
-  }
-  if(translate) {
-    line.style.transform += `translate(${translate})`;
-  }
-  if(rotate === '135deg' || rotate === '45deg') {
-    line.style.width = "120%";
-  }
-  gameBlock.append(line);
+function crossWinnerFields(first,second,third) {
+  first.style.backgroundColor = '#31ff31';
+  second.style.backgroundColor = '#31ff31';
+  third.style.backgroundColor = '#31ff31';
 }
   
 editBtn1.addEventListener("click", displayControlPanel);
