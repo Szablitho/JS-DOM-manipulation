@@ -88,11 +88,6 @@ function startGame() {
       field.style.pointerEvents = 'auto';
       });
     controlPanel.style.pointerEvents = "none";
-    if(document.querySelector("#game > hr")) {
-      let crossLine = document.querySelector("#game > hr");
-      crossLine.parentElement.removeChild(crossLine);
-    };
-    
     let playerOne = JSON.parse(localStorage.getItem('playerOne'));
     turnNotice.innerText = `Your turn ${playerOne[1]}!`;
     turnNotice.style.display = "initial";
@@ -105,6 +100,7 @@ function startGame() {
     controlPanel.style.pointerEvents = "auto";
     gameField.forEach(el => { 
       el.style.color = "";
+      el.style.backgroundColor = '';
       el.style.pointerEvents = "auto";
       el.innerText = ' ';
       winAward.style.display = "none";
