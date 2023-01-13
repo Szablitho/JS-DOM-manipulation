@@ -52,7 +52,7 @@ function confirmName() { //pointer event???
   const setPlayerNameInput = document.querySelector("#player-name-input");
    //validation of name if empty or white spaces(with regular expression)
    if(setPlayerNameInput.value == '' ||  /\s/.test( setPlayerNameInput.value )) {
-    setPlayerNameInput.style.color = "rgb(255, 110, 110)";
+    setPlayerNameInput.style.backgroundColor = "rgb(255, 110, 110)";
   } else {
     //checking playerID and setting new name on assigned to it <span> tag
     if(playerID == 1) {
