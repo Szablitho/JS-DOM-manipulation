@@ -33,34 +33,30 @@ function undarkenBackground() {
 }
 
 function displayControlPanel(event) {
-  let ID = event.target.value;
+  let playerID = event.target.value;
   const overlay = document.querySelector('#overlay');
   overlay.style.visibility = "visible";
   darkenBackground();
-  if(ID == 1) {
-    let playerID = ID;
-    console.log(playerID);
+  if(playerID == 1) {
     localStorage.setItem('playerID', playerID);
   } else {
-    let playerID = ID;
-    console.log(playerID);
     localStorage.setItem('playerID', playerID);
   }
 }
 
 function confirmName() { //pointer event???
-  let firstPlayerName = document.querySelector("#first-player span");
-  let secondPlayerName = document.querySelector("#second-player span");
-  playerID = localStorage.getItem('playerID');
-  console.log(playerID); // this updates the ID in local storage, always use getItem to refresh ID, not "setItem"
+  let firstPlayerNameEl = document.querySelector("#first-player span");
+  let secondPlayerNameEl = document.querySelector("#second-player span");
+  let playerID = localStorage.getItem('playerID');
+  // this updates the ID in local storage, always use getItem to refresh ID, not "setItem"
   const setPlayerNameInput = document.querySelector("#player-name-input");
    //validation of name if empty or white spaces(with regular expression)
-   if(setPlayerNameInput.value == '' ||  /\W/.test( setPlayerNameInput.value )) {
+   if(setPlayerNameInput.value == '' ||  /\s/.test( setPlayerNameInput.value )) {
     setPlayerNameInput.style.backgroundColor = "rgb(255, 110, 110)";
   } else {
     //checking playerID and setting new name on assigned to it <span> tag
     if(playerID == 1) {
-      let name = document.querySelector("#first-player span").textContent = setPlayerNameInput.value;
+      let name = firstPlayerNameEl.textContent = setPlayerNameInput.value;
 
       const playerOne = [playerID, name,'X'];
       //saving array in browser local storage, have to convert it to string first
@@ -69,7 +65,7 @@ function confirmName() { //pointer event???
       overlay.style.visibility = "hidden";
       undarkenBackground();
     } else { 
-        let name = document.querySelector("#second-player span").textContent = setPlayerNameInput.value;
+      let name = secondPlayerNameEl.textContent = setPlayerNameInput.value;
         const playerTwo = [playerID, name, "O"];
         localStorage.setItem("playerTwo", JSON.stringify(playerTwo));
         overlay.style.visibility = "hidden";
@@ -92,6 +88,11 @@ function startGame() {
       field.style.pointerEvents = 'auto';
       });
     controlPanel.style.pointerEvents = "none";
+    if(document.querySelector("#game > hr")) {
+      let crossLine = document.querySelector("#game > hr");
+      crossLine.parentElement.removeChild(crossLine);
+    };
+    
     let playerOne = JSON.parse(localStorage.getItem('playerOne'));
     turnNotice.innerText = `Your turn ${playerOne[1]}!`;
     turnNotice.style.display = "initial";
@@ -156,47 +157,54 @@ function checkWinner(player) {
       //1st arg = html target, 2nd arg = index of array, 3rd arg = array name
   gameField.forEach((field,index) => {
     array[index] = field.innerText; //saving field value in a array
-    console.log(array);
     });
-    //check if there are fields left to fill, if so, it is then a draw
+    //check if there are fields left to fill, if not, it is then a draw
     const areFieldsFull = (value) => value != '';
     if(array.every(areFieldsFull)) {
       winAward.innerHTML = "DRAW";
+      turnNotice.innerHTML = '';
       winAward.style.display = "block";
       gameBlock.style.pointerEvents = "none";
       gameField.forEach((field) => {
         field.style.pointerEvents = 'none';
         });
-      console.log("Player won in last movement! Draw was overwritten by his win - literally in this code");
     }
     //checking if win cases scenarios are met, done just once after all tags were saved in fields and in array for later checkup,making equation to playerTag that is switching on every call of function
     switch (true) {
       //horizontal rows
       case (array[0] == tag && array[1] == tag && array[2] == tag):
         makeWinner(name);
+        crossWinnerFields('0','0,-5em');
         break;
       case (array[3] == tag && array[4] == tag && array[5] == tag):
         makeWinner(name);
+        crossWinnerFields('0','0');
         break;
       case (array[6] == tag && array[7] == tag && array[8] == tag):
         makeWinner(name);
+        crossWinnerFields('0','0,5em');
         break;
         // vertical all rows
       case (array[0] == tag && array[3] == tag && array[6] == tag):
         makeWinner(name);
+        crossWinnerFields('90deg','0, 5em');
         break;
       case (array[1] == tag && array[4] == tag && array[7] == tag):
         makeWinner(name);
+        crossWinnerFields('90deg','0,0');
         break;
       case (array[2] == tag && array[5] == tag && array[8] == tag):
         makeWinner(name);
+        crossWinnerFields('90deg','0, -5em');
         break;
         //diagonall
       case (array[2] == tag && array[4] == tag && array[6] == tag):
         makeWinner(name);
+        crossWinnerFields('135deg','2rem, 1.7rem');
         break;
       case (array[0] == tag && array[4] == tag && array[8] == tag):
         makeWinner(name);
+        crossWinnerFields('45deg','-2rem, 1.7rem');
         break;
     }
 }
@@ -204,10 +212,26 @@ function makeWinner(name) {
   //setting winner
   winAward.innerHTML = `Chicken dinerrr! ${name} is a winnerrrrrrrrrr`;
   winAward.style.display = "block";
+  turnNotice.innerHTML = '';
   //disabling gameField
   gameField.forEach((field) => {
   field.style.pointerEvents = 'none';
   });
+}
+function crossWinnerFields(rotate,translate) {
+  let line = document.createElement("hr");
+  line.style.display = "initial";
+  line.style.position = "absolute";
+  if(rotate) {
+    line.style.transform = `rotate(${rotate}) `;
+  }
+  if(translate) {
+    line.style.transform += `translate(${translate})`;
+  }
+  if(rotate === '135deg' || rotate === '45deg') {
+    line.style.width = "120%";
+  }
+  gameBlock.append(line);
 }
   
 editBtn1.addEventListener("click", displayControlPanel);
