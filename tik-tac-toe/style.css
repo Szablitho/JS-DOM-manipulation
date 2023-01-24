@@ -79,7 +79,7 @@ main button:hover {
 }
 #overlay {
   /* test smooth transition on visibility */
-  z-index: 1;
+  z-index: 2;
   visibility: hidden; 
   background-color: whitesmoke;
   position: fixed;
@@ -107,6 +107,16 @@ main button:hover {
 #cancel-name {
   background-color: transparent;
   color: var(--text-orange);
+}
+#overlay-background {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  visibility: hidden;
+  background-color: rgba(19,19,19,0.4);
 }
 
 #win-award {
@@ -218,7 +228,7 @@ footer ul {
     gap: 1rem;
     justify-content: center;
   }
-  section {
+  section.player {
     width: 30vw;
     margin: 1rem 0;
   }
