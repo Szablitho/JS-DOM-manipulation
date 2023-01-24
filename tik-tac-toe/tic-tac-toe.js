@@ -10,33 +10,13 @@ const gameBlock = document.querySelector("#game");
 const gameField = document.querySelectorAll(".tic-tak-toe-block");
 const turnNotice = document.querySelector("#turn-notice");
 const winAward = document.querySelector('#win-award');
-
-// to be replaced by additinal dark overlay under controlPanel
-function darkenBackground() {
-  document.querySelector("header, main").style.filter = "brightness(0.3)";
-  document.querySelector("header, main").style.filter = "brightness(0.3)";
-  document.querySelector("div,section").style.filter = "brightness(0.3)";
-  document.querySelector("#win-award,  footer").style.filter = "brightness(0.3)";
-  document.querySelector("main > button").style.filter = "brightness(0.3)";
-  document.querySelector("footer").style.filter = "brightness(0.3)";
-  let spans = document.querySelectorAll("#game span");
-    for (const span of spans) {
-      span.style.filter = "brightness(0.3)";
-    }
-}
-
-function undarkenBackground() {
-  const allEll = document.querySelectorAll("*");
-    for (const element of allEll) {
-      element.style = "initial";
-    }
-}
+const overlayBackground = document.querySelector("#overlay-background");
 
 function displayControlPanel(event) {
   let playerID = event.target.value;
   const overlay = document.querySelector('#overlay');
   overlay.style.visibility = "visible";
-  darkenBackground();
+  overlayBackground.style.visibility = "visible";
   if(playerID == 1) {
     localStorage.setItem('playerID', playerID);
   } else {
@@ -63,20 +43,20 @@ function confirmName() { //pointer event???
       localStorage.setItem('playerOne', JSON.stringify(playerOne));
 
       overlay.style.visibility = "hidden";
-      undarkenBackground();
+      overlayBackground.style.visibility = "hidden";
     } else { 
       let name = secondPlayerNameEl.textContent = setPlayerNameInput.value;
         const playerTwo = [playerID, name, "O"];
         localStorage.setItem("playerTwo", JSON.stringify(playerTwo));
         overlay.style.visibility = "hidden";
-        undarkenBackground();
+        overlayBackground.style.visibility = "hidden";
       }
       startGameBtn.style.display = "initial";
   }
 }
 const cancelEditingName = () => {
   overlay.style.visibility = "hidden";
-  undarkenBackground();
+  overlayBackground.style.visibility = "hidden";
 }
 //make function that show game panel, disables profile panel,restarts game
 let gameRestart = false;
